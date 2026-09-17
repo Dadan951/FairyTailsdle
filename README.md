@@ -35,6 +35,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
   - **Saga anime d'apparition** (en plus du premier arc manga)
 - Source : wiki Fairy Tail (fandom.com), infos et images récupérées via l'API MediaWiki (hotlink direct).
 - Droits d'image : images fan-content non-officielles. **Décision : le site restera toujours gratuit, en accès libre, sans compte ni monétisation** — usage non-commercial confirmé durablement, pas seulement le temps du développement.
+- Fond de page : wallpaper fan-art "Wallpaper by Inusuki | Fairy Tail © Hiro Mashima" (`public/background.jpg`), crédit affiché sur le site.
 
 ### Hébergement
 - Vercel (cohérent avec le choix Next.js).

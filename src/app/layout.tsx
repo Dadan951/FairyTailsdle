@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -23,7 +24,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="relative min-h-full flex flex-col">
+        <div className="fixed inset-0 -z-20">
+          <Image src="/background.jpg" alt="" fill priority className="object-cover" />
+        </div>
+        <div className="fixed inset-0 -z-10 bg-zinc-950/80" />
+        {children}
+        <p className="pointer-events-none fixed bottom-1 right-2 text-[10px] text-zinc-500">
+          Wallpaper by Inusuki — Fairy Tail © Hiro Mashima
+        </p>
+      </body>
     </html>
   );
 }

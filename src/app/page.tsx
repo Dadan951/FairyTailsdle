@@ -112,7 +112,7 @@ export default function Home() {
   const guessedIds = session.guesses.map((g) => g.character.id);
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-6 bg-zinc-950 px-4 py-10 text-zinc-50">
+    <div className="relative flex min-h-screen flex-col items-center gap-6 px-4 py-10 text-zinc-50">
       <header className="flex flex-col items-center gap-1 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
         <p className="text-sm text-zinc-400">Devine le personnage Fairy Tail du jour — Puzzle #{puzzleNumber}</p>
