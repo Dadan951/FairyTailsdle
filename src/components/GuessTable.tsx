@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ATTRIBUTE_KEYS, ATTRIBUTE_LABELS, GuessResult } from "@/lib/types";
 
 interface GuessTableProps {
@@ -22,9 +23,10 @@ export default function GuessTable({ guesses }: GuessTableProps) {
 
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[900px] border-separate border-spacing-1 text-center text-sm">
+      <table className="w-full min-w-[980px] border-separate border-spacing-1 text-center text-sm">
         <thead>
           <tr>
+            <th className="px-2 py-2 text-zinc-400">Image</th>
             <th className="px-2 py-2 text-zinc-400">Personnage</th>
             {ATTRIBUTE_KEYS.map((key) => (
               <th key={key} className="px-2 py-2 text-zinc-400">
@@ -36,6 +38,16 @@ export default function GuessTable({ guesses }: GuessTableProps) {
         <tbody>
           {[...guesses].reverse().map((guess) => (
             <tr key={guess.character.id}>
+              <td className="rounded-lg bg-zinc-800 p-1">
+                <Image
+                  src={guess.character.image}
+                  alt={guess.character.name}
+                  width={64}
+                  height={64}
+                  className="mx-auto h-16 w-16 rounded-md object-cover"
+                  unoptimized
+                />
+              </td>
               <td className="rounded-lg bg-zinc-800 px-3 py-3 font-semibold text-zinc-50">
                 {guess.character.name}
               </td>

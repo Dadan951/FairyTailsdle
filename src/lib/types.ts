@@ -4,6 +4,7 @@ export type Status = "Alive" | "Dead" | "Unknown";
 export interface Character {
   id: number;
   name: string;
+  image: string;
   gender: string;
   race: string;
   hairColor: string;

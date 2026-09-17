@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { characters } from "@/data/characters";
 import { compareGuess, getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
 import { DailyState, loadDailyState, loadStats, recordResult, saveDailyState, Stats } from "@/lib/storage";
@@ -129,6 +130,14 @@ export default function Home() {
 
       {session.finished && (
         <div className="flex w-full max-w-md flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">
+          <Image
+            src={answer.image}
+            alt={answer.name}
+            width={120}
+            height={120}
+            className="h-28 w-28 rounded-lg object-cover"
+            unoptimized
+          />
           <p className="text-lg font-bold">
             {session.won ? "🎉 Bien joué !" : "Dommage !"} C&apos;était{" "}
             <span className="text-pink-400">{answer.name}</span>
