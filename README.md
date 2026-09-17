@@ -12,8 +12,8 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - **Angle choisi : faire mieux** (design/UX, plus de modes, data plus riche, progression locale plus poussée) plutôt que viser un univers vierge.
 
 ### Modes de jeu prévus
-- [ ] Classic (tableau d'attributs, comme l'existant mais avec des attributs plus riches/à jour)
-- [ ] Silhouette (silhouette du perso qui se révèle progressivement)
+- [x] Classic (tableau d'attributs, comme l'existant mais avec des attributs plus riches/à jour)
+- [x] Silhouette (silhouette noire fixe du perso + indices débloqués tous les 3 essais : guilde, cheveux, genre, magie, race, statut)
 - [ ] Citation (deviner via une réplique célèbre)
 - [ ] Image floutée/zoomée (dézoom ou défloutage progressif à chaque essai)
 - [ ] Emoji (deviner via une suite d'emojis représentant le perso)
@@ -41,7 +41,12 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Mode Classic jouable (données, comparaison, images, stats locales, partage) — modes Silhouette/Citation/Image floutée/Emoji à venir.
+Modes Classic et Silhouette jouables — Citation/Image floutée/Emoji à venir.
+
+### Note technique — mode Silhouette
+Les images du wiki n'ont pas de fond transparent (fond opaque uni). La silhouette est obtenue
+en détectant côté client la couleur de fond (coins de l'image) via `<canvas>` et en la rendant
+transparente, pour ne garder que la découpe noire du personnage (voir `SilhouetteImage.tsx`).
 
 ---
 

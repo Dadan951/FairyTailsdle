@@ -1,25 +1,27 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 import { characters } from "@/data/characters";
-import { compareGuess, getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
+import { getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
+import { unlockedHintCount } from "@/lib/hints";
 import { DailyState, loadDailyState, loadStats, recordResult, saveDailyState, Stats } from "@/lib/storage";
-import { ATTRIBUTE_KEYS, GuessResult } from "@/lib/types";
+import { Character } from "@/lib/types";
 import CharacterSearch from "@/components/CharacterSearch";
-import GuessTable from "@/components/GuessTable";
-import StatsBar from "@/components/StatsBar";
+import GuessList from "@/components/GuessList";
+import HintPanel from "@/components/HintPanel";
 import ModeNav from "@/components/ModeNav";
+import SilhouetteImage from "@/components/SilhouetteImage";
+import StatsBar from "@/components/StatsBar";
 
-const EMOJI: Record<string, string> = {
-  correct: "🟩",
-  incorrect: "🟥",
-  higher: "🟨",
-  lower: "🟨",
-};
+const MODE = "silhouette" as const;
+
+interface Guess {
+  character: Character;
+  correct: boolean;
+}
 
 interface Session {
-  guesses: GuessResult[];
+  guesses: Guess[];
   finished: boolean;
   won: boolean;
   stats: Stats | null;
@@ -27,41 +29,39 @@ interface Session {
 
 const EMPTY_SESSION: Session = { guesses: [], finished: false, won: false, stats: null };
 
-export default function Home() {
+export default function SilhouettePage() {
   const today = useMemo(() => new Date(), []);
   const dateKey = useMemo(() => getTodayKey(today), [today]);
   const puzzleNumber = useMemo(() => getPuzzleNumber(today), [today]);
   const answer = useMemo(() => getTodayCharacter(today), [today]);
 
-  // Le rendu serveur/premier rendu client démarre vide (localStorage n'existe pas côté serveur,
-  // donc on ne peut pas le lire dans l'état initial sans provoquer un mismatch d'hydratation).
   const [session, setSession] = useState<Session>(EMPTY_SESSION);
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const daily: DailyState = loadDailyState("classic", dateKey);
+    const daily: DailyState = loadDailyState(MODE, dateKey);
     const restoredGuesses = daily.guessIds
       .map((id) => characters.find((c) => c.id === id))
-      .filter((c): c is NonNullable<typeof c> => Boolean(c))
-      .map((c) => compareGuess(c, answer));
+      .filter((c): c is Character => Boolean(c))
+      .map((c) => ({ character: c, correct: c.id === answer.id }));
 
     // eslint-disable-next-line react-hooks/set-state-in-effect -- synchronisation ponctuelle avec localStorage (indisponible côté serveur), pas de source de vérité React alternative ici.
     setSession({
       guesses: restoredGuesses,
       finished: daily.finished,
       won: daily.won,
-      stats: loadStats("classic"),
+      stats: loadStats(MODE),
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateKey]);
 
-  function persist(nextGuesses: GuessResult[], nextFinished: boolean, nextWon: boolean) {
+  function persist(nextGuesses: Guess[], nextFinished: boolean, nextWon: boolean) {
     const state: DailyState = {
       guessIds: nextGuesses.map((g) => g.character.id),
       finished: nextFinished,
       won: nextWon,
     };
-    saveDailyState("classic", dateKey, state);
+    saveDailyState(MODE, dateKey, state);
   }
 
   function handleGuess(characterId: number) {
@@ -69,16 +69,16 @@ export default function Home() {
     const character = characters.find((c) => c.id === characterId);
     if (!character) return;
 
-    const result = compareGuess(character, answer);
-    const nextGuesses = [...session.guesses, result];
+    const correct = character.id === answer.id;
+    const nextGuesses = [...session.guesses, { character, correct }];
 
-    if (result.isCorrect) {
+    if (correct) {
       persist(nextGuesses, true, true);
       setSession({
         guesses: nextGuesses,
         finished: true,
         won: true,
-        stats: recordResult("classic", dateKey, true, nextGuesses.length),
+        stats: recordResult(MODE, dateKey, true, nextGuesses.length),
       });
     } else {
       persist(nextGuesses, false, false);
@@ -87,15 +87,12 @@ export default function Home() {
   }
 
   function handleShare() {
-    const lines = session.guesses.map((g) =>
-      ATTRIBUTE_KEYS.map((key) => EMOJI[g.attributes[key].status]).join("")
-    );
+    const hintsUsed = unlockedHintCount(session.guesses.length);
     const text = [
-      `FairyTailsdle #${puzzleNumber}`,
+      `FairyTailsdle Silhouette #${puzzleNumber}`,
       session.won
-        ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""} 🎉`
+        ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""} (${hintsUsed} indice${hintsUsed > 1 ? "s" : ""}) 🎉`
         : "Pas trouvé aujourd'hui 😔",
-      ...lines,
     ].join("\n");
 
     navigator.clipboard.writeText(text).then(
@@ -104,7 +101,6 @@ export default function Home() {
         setTimeout(() => setCopied(false), 2000);
       },
       () => {
-        // Presse-papier indisponible (permissions navigateur) : on affiche le résultat pour copie manuelle.
         window.prompt("Copie ton résultat :", text);
       }
     );
@@ -116,11 +112,17 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center gap-6 bg-zinc-950 px-4 py-10 text-zinc-50">
       <header className="flex flex-col items-center gap-3 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
-        <p className="text-sm text-zinc-400">Devine le personnage Fairy Tail du jour — Puzzle #{puzzleNumber}</p>
+        <p className="text-sm text-zinc-400">
+          Devine le personnage à sa silhouette — Puzzle #{puzzleNumber}
+        </p>
         <ModeNav />
       </header>
 
       {session.stats && <StatsBar stats={session.stats} />}
+
+      <SilhouetteImage src={answer.image} alt={answer.name} revealed={session.finished} />
+
+      {!session.finished && <HintPanel answer={answer} guessCount={session.guesses.length} />}
 
       {!session.finished && (
         <CharacterSearch
@@ -132,14 +134,6 @@ export default function Home() {
 
       {session.finished && (
         <div className="flex w-full max-w-md flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">
-          <Image
-            src={answer.image}
-            alt={answer.name}
-            width={120}
-            height={120}
-            className="h-28 w-28 rounded-lg object-cover"
-            unoptimized
-          />
           <p className="text-lg font-bold">
             {session.won ? "🎉 Bien joué !" : "Dommage !"} C&apos;était{" "}
             <span className="text-pink-400">{answer.name}</span>
@@ -153,7 +147,7 @@ export default function Home() {
         </div>
       )}
 
-      <GuessTable guesses={session.guesses} />
+      <GuessList guesses={session.guesses.map((g) => ({ name: g.character.name, correct: g.correct }))} />
     </div>
   );
 }
