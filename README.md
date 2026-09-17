@@ -34,14 +34,14 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
   - **Statut** (vivant / mort)
   - **Type de magie** (Caster / Holder)
   - **Saga anime d'apparition** (en plus du premier arc manga)
-- Source : wiki Fairy Tail (fandom.com), infos et images récupérées manuellement/progressivement.
-- ⚠️ Point d'attention droits d'image : images du wiki Fandom = fan-content non-officiel, à utiliser en usage non-commercial (projet perso/portfolio), à garder en tête si le repo passe public ou si le site est monétisé un jour.
+- Source : wiki Fairy Tail (fandom.com), infos et images récupérées via l'API MediaWiki (hotlink direct).
+- Droits d'image : images fan-content non-officielles. **Décision : le site restera toujours gratuit, en accès libre, sans compte ni monétisation** — usage non-commercial confirmé durablement, pas seulement le temps du développement.
 
 ### Hébergement
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Scaffolding Next.js en place — développement des modes de jeu à venir.
+Mode Classic jouable (données, comparaison, images, stats locales, partage) — modes Silhouette/Citation/Image floutée/Emoji à venir.
 
 ---
 
