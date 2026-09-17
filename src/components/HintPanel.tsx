@@ -24,10 +24,10 @@ export default function HintPanel({ answer, guessCount }: HintPanelProps) {
             <span
               key={key}
               className={`rounded-full px-3 py-1 text-sm font-medium ${
-                isUnlocked ? "bg-pink-600 text-white" : "bg-zinc-800 text-zinc-600"
+                isUnlocked ? "bg-pink-600 text-white" : "bg-zinc-800 text-zinc-400"
               }`}
             >
-              {isUnlocked ? `${ATTRIBUTE_LABELS[key]} : ${answer[key]}` : "??? verrouillé"}
+              {ATTRIBUTE_LABELS[key]} : {isUnlocked ? answer[key] : "???"}
             </span>
           );
         })}

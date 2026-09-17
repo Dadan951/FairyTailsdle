@@ -1,14 +1,7 @@
 import { AttributeKey } from "@/lib/types";
 
-/** Ordre de déblocage des indices en mode Silhouette (un tous les 3 essais). */
-export const HINT_ATTRIBUTES: AttributeKey[] = [
-  "affiliation",
-  "hairColor",
-  "gender",
-  "magicAttribute",
-  "race",
-  "status",
-];
+/** Ordre de déblocage des indices (un tous les 3 essais). */
+export const HINT_ATTRIBUTES: AttributeKey[] = ["affiliation", "hairColor", "gender"];
 
 export const GUESSES_PER_HINT = 3;
 
