@@ -1,0 +1,71 @@
+import { Character } from "@/lib/types";
+
+// Ordre chronologique des arcs manga (utilisé pour la comparaison "avant/après").
+export const ARC_ORDER = [
+  "Macao arc",
+  "Eisenwald arc",
+  "Galuna Island arc",
+  "Phantom Lord arc",
+  "Loke arc",
+  "Tower of Heaven arc",
+  "Battle of Fairy Tail arc",
+  "Oración Seis arc",
+  "Edolas arc",
+  "Tenrou Island arc",
+  "Grand Magic Games arc",
+  "Tartaros arc",
+  "Avatar arc",
+  "Alvarez arc",
+] as const;
+
+// Ordre chronologique des sagas (regroupements plus larges).
+export const SAGA_ORDER = [
+  "Macao Saga",
+  "Phantom Lord Saga",
+  "Tower of Heaven Saga",
+  "Battle of Fairy Tail Saga",
+  "Edolas Saga",
+  "Tenrou Island Saga",
+  "Grand Magic Games Saga",
+  "Tartaros Saga",
+  "Alvarez Empire Saga",
+] as const;
+
+// Jeu de données de départ — à enrichir/vérifier progressivement contre le wiki Fairy Tail (Fandom).
+export const characters: Character[] = [
+  { id: 1, name: "Natsu Dragneel", gender: "Male", race: "Human", hairColor: "Pink", eyeColor: "Black", magicAttribute: "Fire Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 2, name: "Lucy Heartfilia", gender: "Female", race: "Human", hairColor: "Blonde", eyeColor: "Brown", magicAttribute: "Spatial/Dimensional Magic", magicType: "Holder", weapon: "Whip", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 3, name: "Gray Fullbuster", gender: "Male", race: "Human", hairColor: "Black", eyeColor: "Dark", magicAttribute: "Ice Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 4, name: "Erza Scarlet", gender: "Female", race: "Human", hairColor: "Red", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Holder", weapon: "Blade", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 5, name: "Happy", gender: "Male", race: "Exceed", hairColor: "Blue", eyeColor: "Black", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Pet", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 6, name: "Wendy Marvell", gender: "Female", race: "Human", hairColor: "Blue", eyeColor: "Brown", magicAttribute: "Wind/Air Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Edolas arc", animeSaga: "Edolas Saga" },
+  { id: 7, name: "Charle", gender: "Female", race: "Exceed", hairColor: "White", eyeColor: "Black", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Pet", affiliation: "Fairy Tail", status: "Alive", firstArc: "Edolas arc", animeSaga: "Edolas Saga" },
+  { id: 8, name: "Gajeel Redfox", gender: "Male", race: "Human", hairColor: "Black", eyeColor: "Red", magicAttribute: "Metal Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Phantom Lord arc", animeSaga: "Phantom Lord Saga" },
+  { id: 9, name: "Levy McGarden", gender: "Female", race: "Human", hairColor: "Blue", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 10, name: "Juvia Lockser", gender: "Female", race: "Human", hairColor: "Blue", eyeColor: "Blue", magicAttribute: "Water Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Phantom Lord arc", animeSaga: "Phantom Lord Saga" },
+  { id: 11, name: "Cana Alberona", gender: "Female", race: "Human", hairColor: "Brown", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Holder", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 12, name: "Elfman Strauss", gender: "Male", race: "Human", hairColor: "White", eyeColor: "Black", magicAttribute: "Body/Transformation Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 13, name: "Mirajane Strauss", gender: "Female", race: "Human", hairColor: "White", eyeColor: "Blue", magicAttribute: "Body/Transformation Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 14, name: "Lisanna Strauss", gender: "Female", race: "Human", hairColor: "White", eyeColor: "Blue", magicAttribute: "Body/Transformation Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 15, name: "Laxus Dreyar", gender: "Male", race: "Human", hairColor: "Blonde", eyeColor: "Brown", magicAttribute: "Light/Shadow Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Battle of Fairy Tail arc", animeSaga: "Battle of Fairy Tail Saga" },
+  { id: 16, name: "Freed Justine", gender: "Male", race: "Human", hairColor: "Green", eyeColor: "Green", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "Sword", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Battle of Fairy Tail arc", animeSaga: "Battle of Fairy Tail Saga" },
+  { id: 17, name: "Bickslow", gender: "Male", race: "Human", hairColor: "Blue", eyeColor: "Yellow", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Battle of Fairy Tail arc", animeSaga: "Battle of Fairy Tail Saga" },
+  { id: 18, name: "Evergreen", gender: "Female", race: "Human", hairColor: "Brown", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "Fan", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Battle of Fairy Tail arc", animeSaga: "Battle of Fairy Tail Saga" },
+  { id: 19, name: "Makarov Dreyar", gender: "Male", race: "Human", hairColor: "White", eyeColor: "Black", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Fairy Tail", status: "Alive", firstArc: "Macao arc", animeSaga: "Macao Saga" },
+  { id: 20, name: "Gildarts Clive", gender: "Male", race: "Human", hairColor: "Orange", eyeColor: "Black", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Fairy Tail", status: "Alive", firstArc: "Battle of Fairy Tail arc", animeSaga: "Battle of Fairy Tail Saga" },
+  { id: 21, name: "Jellal Fernandes", gender: "Male", race: "Human", hairColor: "Blue", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Crime Sorcière", status: "Alive", firstArc: "Tower of Heaven arc", animeSaga: "Tower of Heaven Saga" },
+  { id: 22, name: "Ultear Milkovich", gender: "Female", race: "Human", hairColor: "Black", eyeColor: "Brown", magicAttribute: "Time Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Crime Sorcière", status: "Dead", firstArc: "Tenrou Island arc", animeSaga: "Tenrou Island Saga" },
+  { id: 23, name: "Meredy", gender: "Female", race: "Human", hairColor: "Pink", eyeColor: "Green", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Crime Sorcière", status: "Alive", firstArc: "Tenrou Island arc", animeSaga: "Tenrou Island Saga" },
+  { id: 24, name: "Zeref Dragneel", gender: "Male", race: "Human", hairColor: "Black", eyeColor: "Red", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Alvarez Empire", status: "Dead", firstArc: "Tenrou Island arc", animeSaga: "Tenrou Island Saga" },
+  { id: 25, name: "Mavis Vermillion", gender: "Female", race: "Human", hairColor: "Blonde", eyeColor: "Green", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Fairy Tail", status: "Dead", firstArc: "Tenrou Island arc", animeSaga: "Tenrou Island Saga" },
+  { id: 26, name: "Acnologia", gender: "Male", race: "Dragon", hairColor: "Blue", eyeColor: "Red", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "None", affiliation: "None", status: "Dead", firstArc: "Tenrou Island arc", animeSaga: "Tenrou Island Saga" },
+  { id: 27, name: "Sting Eucliffe", gender: "Male", race: "Human", hairColor: "Blonde", eyeColor: "Blue", magicAttribute: "Light/Shadow Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Sabertooth", status: "Alive", firstArc: "Grand Magic Games arc", animeSaga: "Grand Magic Games Saga" },
+  { id: 28, name: "Rogue Cheney", gender: "Male", race: "Human", hairColor: "Black", eyeColor: "Red", magicAttribute: "Light/Shadow Magic", magicType: "Caster", weapon: "Sword", occupation: "Mage", affiliation: "Sabertooth", status: "Alive", firstArc: "Grand Magic Games arc", animeSaga: "Grand Magic Games Saga" },
+  { id: 29, name: "Minerva Orlando", gender: "Female", race: "Human", hairColor: "Black", eyeColor: "Brown", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Sabertooth", status: "Alive", firstArc: "Grand Magic Games arc", animeSaga: "Grand Magic Games Saga" },
+  { id: 30, name: "Kagura Mikazuchi", gender: "Female", race: "Human", hairColor: "Black", eyeColor: "Grey", magicAttribute: "Other/Unique Magic", magicType: "Holder", weapon: "Sword", occupation: "Mage", affiliation: "Mermaid Heel", status: "Alive", firstArc: "Grand Magic Games arc", animeSaga: "Grand Magic Games Saga" },
+  { id: 31, name: "Rufus Lohr", gender: "Male", race: "Human", hairColor: "White", eyeColor: "Blue", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Sabertooth", status: "Alive", firstArc: "Grand Magic Games arc", animeSaga: "Grand Magic Games Saga" },
+  { id: 32, name: "Mard Geer Tartaros", gender: "Male", race: "Demon", hairColor: "White", eyeColor: "Purple", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Tartaros", status: "Dead", firstArc: "Tartaros arc", animeSaga: "Tartaros Saga" },
+  { id: 33, name: "Silver Fullbuster", gender: "Male", race: "Demon", hairColor: "Black", eyeColor: "Blue", magicAttribute: "Ice Magic", magicType: "Caster", weapon: "None", occupation: "Mage", affiliation: "Tartaros", status: "Dead", firstArc: "Tartaros arc", animeSaga: "Tartaros Saga" },
+  { id: 34, name: "August", gender: "Male", race: "Human", hairColor: "White", eyeColor: "Grey", magicAttribute: "Other/Unique Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Alvarez Empire", status: "Dead", firstArc: "Alvarez arc", animeSaga: "Alvarez Empire Saga" },
+  { id: 35, name: "Irene Belserion", gender: "Female", race: "Human", hairColor: "Red", eyeColor: "Blue", magicAttribute: "Enchantment/Curse Magic", magicType: "Caster", weapon: "None", occupation: "Ruler", affiliation: "Alvarez Empire", status: "Dead", firstArc: "Alvarez arc", animeSaga: "Alvarez Empire Saga" },
+];
