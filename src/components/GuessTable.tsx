@@ -22,51 +22,40 @@ export default function GuessTable({ guesses }: GuessTableProps) {
   if (guesses.length === 0) return null;
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[980px] border-separate border-spacing-1 text-center text-sm">
-        <thead>
-          <tr>
-            <th className="px-2 py-2 text-zinc-400">Image</th>
-            <th className="px-2 py-2 text-zinc-400">Personnage</th>
-            {ATTRIBUTE_KEYS.map((key) => (
-              <th key={key} className="px-2 py-2 text-zinc-400">
-                {ATTRIBUTE_LABELS[key]}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {[...guesses].reverse().map((guess) => (
-            <tr key={guess.character.id}>
-              <td className="rounded-lg bg-zinc-800 p-1">
-                <Image
-                  src={guess.character.image}
-                  alt={guess.character.name}
-                  width={64}
-                  height={64}
-                  className="mx-auto h-16 w-16 rounded-md object-cover"
-                  unoptimized
-                />
-              </td>
-              <td className="rounded-lg bg-zinc-800 px-3 py-3 font-semibold text-zinc-50">
-                {guess.character.name}
-              </td>
-              {ATTRIBUTE_KEYS.map((key) => {
-                const attr = guess.attributes[key];
-                return (
-                  <td
-                    key={key}
-                    className={`rounded-lg px-2 py-3 font-medium ${CELL_STYLES[attr.status]}`}
-                  >
+    <div className="flex w-full max-w-md flex-col gap-3">
+      {[...guesses].reverse().map((guess) => (
+        <div key={guess.character.id} className="rounded-lg bg-zinc-900 p-3">
+          <div className="mb-2 flex items-center gap-2">
+            <Image
+              src={guess.character.image}
+              alt={guess.character.name}
+              width={40}
+              height={40}
+              className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
+              unoptimized
+            />
+            <span className="font-semibold text-zinc-50">{guess.character.name}</span>
+          </div>
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+            {ATTRIBUTE_KEYS.map((key, i) => {
+              const attr = guess.attributes[key];
+              return (
+                <div
+                  key={key}
+                  style={{ animationDelay: `${i * 60}ms` }}
+                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium ${CELL_STYLES[attr.status]}`}
+                >
+                  <div className="text-[10px] uppercase opacity-80">{ATTRIBUTE_LABELS[key]}</div>
+                  <div>
                     {attr.value}
                     {arrowFor(attr.status)}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
