@@ -24,13 +24,21 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Partage de résultat façon Wordle (grille emoji copiable dans le presse-papier).
 
 ### Stack technique
-- À définir (prochaine étape du cahier des charges).
+- **Next.js** (React), déployé en site statique/SPA — pas de backend, pas de compte.
+- Déploiement prévu sur Vercel (gratuit, zéro-config avec Next.js).
 
 ### Données des personnages
-- À définir : format (JSON), attributs retenus, source (wiki Fairy Tail), droits d'images.
+- Format : JSON local (un fichier par personnage ou un fichier unique liste).
+- Attributs Classic :
+  - Nom, Genre, Race, Couleur cheveux, Couleur yeux, Attribut magique, Arme, Occupation, Affiliation, Premier arc (base identique à l'existant)
+  - **Statut** (vivant / mort)
+  - **Type de magie** (Caster / Holder)
+  - **Saga anime d'apparition** (en plus du premier arc manga)
+- Source : wiki Fairy Tail (fandom.com), infos et images récupérées manuellement/progressivement.
+- ⚠️ Point d'attention droits d'image : images du wiki Fandom = fan-content non-officiel, à utiliser en usage non-commercial (projet perso/portfolio), à garder en tête si le repo passe public ou si le site est monétisé un jour.
 
 ### Hébergement
-- À définir : probablement site statique (GitHub Pages / Vercel / Netlify).
+- Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Projet en phase de cadrage — pas encore de code.
+Cahier des charges initial complet — prêt à démarrer le scaffolding Next.js.
