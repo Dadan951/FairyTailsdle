@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { Character } from "@/lib/types";
 
 interface CharacterSearchProps {
@@ -57,8 +58,16 @@ export default function CharacterSearch({
                 type="button"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => handleSelect(c)}
-                className="w-full px-4 py-2 text-left text-zinc-50 hover:bg-pink-600/20"
+                className="flex w-full items-center gap-3 px-3 py-2 text-left text-zinc-50 hover:bg-pink-600/20"
               >
+                <Image
+                  src={c.image}
+                  alt={c.name}
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 flex-shrink-0 rounded-full object-cover"
+                  unoptimized
+                />
                 {c.name}
               </button>
             </li>

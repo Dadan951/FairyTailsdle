@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const MODES = [
   { href: "/", label: "Classic" },
-  { href: "/silhouette", label: "Silhouette" },
+  { href: "/indices", label: "Indices" },
 ];
 
 export default function ModeNav() {

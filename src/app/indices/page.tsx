@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { characters } from "@/data/characters";
 import { getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
 import { unlockedHintCount } from "@/lib/hints";
@@ -10,10 +11,9 @@ import CharacterSearch from "@/components/CharacterSearch";
 import GuessList from "@/components/GuessList";
 import HintPanel from "@/components/HintPanel";
 import ModeNav from "@/components/ModeNav";
-import SilhouetteImage from "@/components/SilhouetteImage";
 import StatsBar from "@/components/StatsBar";
 
-const MODE = "silhouette" as const;
+const MODE = "indices" as const;
 
 interface Guess {
   character: Character;
@@ -29,7 +29,7 @@ interface Session {
 
 const EMPTY_SESSION: Session = { guesses: [], finished: false, won: false, stats: null };
 
-export default function SilhouettePage() {
+export default function IndicesPage() {
   const today = useMemo(() => new Date(), []);
   const dateKey = useMemo(() => getTodayKey(today), [today]);
   const puzzleNumber = useMemo(() => getPuzzleNumber(today), [today]);
@@ -89,7 +89,7 @@ export default function SilhouettePage() {
   function handleShare() {
     const hintsUsed = unlockedHintCount(session.guesses.length);
     const text = [
-      `FairyTailsdle Silhouette #${puzzleNumber}`,
+      `FairyTailsdle Indices #${puzzleNumber}`,
       session.won
         ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""} (${hintsUsed} indice${hintsUsed > 1 ? "s" : ""}) 🎉`
         : "Pas trouvé aujourd'hui 😔",
@@ -113,14 +113,12 @@ export default function SilhouettePage() {
       <header className="flex flex-col items-center gap-3 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
         <p className="text-sm text-zinc-400">
-          Devine le personnage à sa silhouette — Puzzle #{puzzleNumber}
+          Devine le personnage grâce aux indices — Puzzle #{puzzleNumber}
         </p>
         <ModeNav />
       </header>
 
       {session.stats && <StatsBar stats={session.stats} />}
-
-      <SilhouetteImage src={answer.image} alt={answer.name} revealed={session.finished} />
 
       {!session.finished && <HintPanel answer={answer} guessCount={session.guesses.length} />}
 
@@ -134,6 +132,14 @@ export default function SilhouettePage() {
 
       {session.finished && (
         <div className="flex w-full max-w-md flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">
+          <Image
+            src={answer.image}
+            alt={answer.name}
+            width={120}
+            height={120}
+            className="h-28 w-28 rounded-lg object-cover"
+            unoptimized
+          />
           <p className="text-lg font-bold">
             {session.won ? "🎉 Bien joué !" : "Dommage !"} C&apos;était{" "}
             <span className="text-pink-400">{answer.name}</span>
