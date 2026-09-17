@@ -4,7 +4,7 @@ Jeu quotidien type Wordle/Loldle basé sur l'univers **Fairy Tail**. Le joueur d
 
 Objectif : proposer une meilleure exécution que les sites existants (ex. Mangadle.net), pas forcément une première mondiale sur l'univers.
 
-## Cahier des charges (en cours)
+## Cahier des charges
 
 ### Constat marché
 - La quasi-totalité des univers manga/anime populaires ont déjà un "-dle" (Naruto, One Piece, MHA, JJK, Chainsaw Man, Fairy Tail...), souvent via des hubs génériques (Mangadle.net, Chardle.com, Animedle.org).
@@ -24,8 +24,8 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Partage de résultat façon Wordle (grille emoji copiable dans le presse-papier).
 
 ### Stack technique
-- **Next.js** (React), déployé en site statique/SPA — pas de backend, pas de compte.
-- Déploiement prévu sur Vercel (gratuit, zéro-config avec Next.js).
+- **Next.js** (React, TypeScript, App Router, Tailwind CSS, ESLint) — pas de backend, pas de compte.
+- Déploiement sur **Vercel**.
 
 ### Données des personnages
 - Format : JSON local (un fichier par personnage ou un fichier unique liste).
@@ -41,4 +41,18 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Cahier des charges initial complet — prêt à démarrer le scaffolding Next.js.
+Scaffolding Next.js en place — développement des modes de jeu à venir.
+
+---
+
+## Développement
+
+Projet Next.js standard (créé avec `create-next-app`).
+
+```bash
+npm run dev
+```
+
+Ouvrir [http://localhost:3000](http://localhost:3000).
+
+Déployé automatiquement sur Vercel à chaque push sur `main`.
