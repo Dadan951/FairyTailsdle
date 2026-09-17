@@ -8,8 +8,7 @@ import { DailyState, loadDailyState, loadStats, recordResult, saveDailyState, St
 import { ATTRIBUTE_KEYS, GuessResult } from "@/lib/types";
 import CharacterSearch from "@/components/CharacterSearch";
 import GuessTable from "@/components/GuessTable";
-import StatsBar from "@/components/StatsBar";
-import ModeNav from "@/components/ModeNav";
+import HintPanel from "@/components/HintPanel";
 
 const EMOJI: Record<string, string> = {
   correct: "🟩",
@@ -114,13 +113,10 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-6 bg-zinc-950 px-4 py-10 text-zinc-50">
-      <header className="flex flex-col items-center gap-3 text-center">
+      <header className="flex flex-col items-center gap-1 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
         <p className="text-sm text-zinc-400">Devine le personnage Fairy Tail du jour — Puzzle #{puzzleNumber}</p>
-        <ModeNav />
       </header>
-
-      {session.stats && <StatsBar stats={session.stats} />}
 
       {!session.finished && (
         <CharacterSearch
@@ -129,6 +125,8 @@ export default function Home() {
           onGuess={(c) => handleGuess(c.id)}
         />
       )}
+
+      {!session.finished && <HintPanel answer={answer} guessCount={session.guesses.length} />}
 
       {session.finished && (
         <div className="flex w-full max-w-md flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">

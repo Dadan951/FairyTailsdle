@@ -12,15 +12,14 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - **Angle choisi : faire mieux** (design/UX, plus de modes, data plus riche, progression locale plus poussée) plutôt que viser un univers vierge.
 
 ### Modes de jeu prévus
-- [x] Classic (tableau d'attributs, comme l'existant mais avec des attributs plus riches/à jour)
-- [x] Indices (pas d'image, indice débloqué tous les 3 essais : guilde, cheveux, genre, magie, race, statut)
+- [x] Classic (tableau d'attributs, avec en plus un système d'indices intégré : un indice supplémentaire — guilde, cheveux, genre, magie, race, statut — se débloque tous les 3 essais ratés)
 - [ ] Citation (deviner via une réplique célèbre)
 - [ ] Image floutée/zoomée (dézoom ou défloutage progressif à chaque essai)
 - [ ] Emoji (deviner via une suite d'emojis représentant le perso)
 
 ### Progression / social
 - Pas de compte utilisateur, pas de backend.
-- Stats enrichies en local (localStorage) : streak, historique, moyenne, etc.
+- Streak/historique calculés et stockés en local (localStorage) — pas affichés dans l'UI pour l'instant (retiré pour épurer la page principale).
 - Partage de résultat façon Wordle (grille emoji copiable dans le presse-papier).
 
 ### Stack technique
@@ -41,8 +40,8 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Modes Classic et Indices jouables — Citation/Image floutée/Emoji à venir.
-La recherche de personnage (autocomplete) affiche désormais une miniature à côté de chaque nom.
+Mode Classic jouable avec indices intégrés — Citation/Image floutée/Emoji à venir.
+La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
 
 ---
 
