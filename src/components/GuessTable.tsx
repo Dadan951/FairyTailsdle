@@ -28,45 +28,53 @@ export default function GuessTable({ guesses }: GuessTableProps) {
   if (guesses.length === 0) return null;
 
   return (
-    <div className="flex w-full max-w-lg flex-col gap-3">
-      {[...guesses].reverse().map((guess) => (
-        <div
-          key={guess.character.id}
-          className="animate-card-reveal rounded-lg bg-zinc-900 p-3 shadow-md"
-        >
-          <div className="mb-2 flex items-center gap-2">
-            <Image
-              src={guess.character.image}
-              alt={guess.character.name}
-              width={40}
-              height={40}
-              className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
-              unoptimized
-            />
-            <span className="font-semibold text-zinc-50">{guess.character.name}</span>
-          </div>
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
-            {ATTRIBUTE_KEYS.map((key, i) => {
-              const attr = guess.attributes[key];
-              return (
-                <div
-                  key={key}
-                  style={{ animationDelay: `${i * 60}ms` }}
-                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
-                >
-                  <div className="text-[10px] uppercase opacity-80">
-                    {ATTRIBUTE_LABELS[lang][key]}
-                  </div>
-                  <div>
+    <div className="w-full max-w-4xl overflow-x-auto rounded-lg">
+      <table className="w-full min-w-[900px] border-separate border-spacing-1 text-center text-sm">
+        <thead>
+          <tr>
+            <th className="sticky left-0 bg-zinc-950 px-2 py-2 text-zinc-400">
+              {/* personnage */}
+            </th>
+            {ATTRIBUTE_KEYS.map((key) => (
+              <th key={key} className="px-2 py-2 text-xs text-zinc-400">
+                {ATTRIBUTE_LABELS[lang][key]}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {[...guesses].reverse().map((guess) => (
+            <tr key={guess.character.id} className="animate-card-reveal">
+              <td className="sticky left-0 z-10 rounded-lg bg-zinc-900 px-3 py-2 text-left font-semibold text-zinc-50">
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={guess.character.image}
+                    alt={guess.character.name}
+                    width={36}
+                    height={36}
+                    className="h-9 w-9 flex-shrink-0 rounded-full object-cover"
+                    unoptimized
+                  />
+                  <span className="whitespace-nowrap">{guess.character.name}</span>
+                </div>
+              </td>
+              {ATTRIBUTE_KEYS.map((key, i) => {
+                const attr = guess.attributes[key];
+                return (
+                  <td
+                    key={key}
+                    style={{ animationDelay: `${i * 60}ms` }}
+                    className={`animate-attribute-reveal whitespace-nowrap rounded-lg px-2 py-2 font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
+                  >
                     {translateValue(lang, attr.value)}
                     {arrowFor(attr.status)}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      ))}
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

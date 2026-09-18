@@ -16,20 +16,8 @@ export default function HomePage() {
       </header>
 
       <div className="flex w-full max-w-md flex-col gap-4">
-        <ModeCard
-          href="/classic"
-          icon="❓"
-          iconBg="bg-sky-600"
-          title={ui.classicModeTitle}
-          description={ui.classicModeDesc}
-        />
-        <ModeCard
-          href="/image"
-          icon="🖼️"
-          iconBg="bg-fuchsia-600"
-          title={ui.imageModeTitle}
-          description={ui.imageModeDesc}
-        />
+        <ModeCard href="/classic" title={ui.classicModeTitle} description={ui.classicModeDesc} />
+        <ModeCard href="/image" title={ui.imageModeTitle} description={ui.imageModeDesc} />
       </div>
     </div>
   );
