@@ -51,8 +51,13 @@ Pied de page (`Footer.tsx`) avec une courte explication du site et le crédit du
 mention de la stack technique. Écran d'accueil avec 2 modes jouables (Classic, Image pixelisée),
 FR/EN, responsive mobile — Citation/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
-Le tableau d'attributs (Classic) est en une seule ligne par tentative avec une colonne
-personnage fixe (`sticky`) et un unique défilement horizontal pour tout le tableau.
+
+Le tableau d'attributs (Classic) est responsive et **sans aucune barre de défilement** :
+- Desktop/tablette (`sm:` et plus) : vraie ligne de tableau, `table-fixed`, le texte long
+  (ex. "Arc de la Bataille de Fairy Tail") se replie sur plusieurs lignes dans sa cellule au
+  lieu de forcer la largeur du tableau.
+- Mobile (< `sm`) : cartes par tentative avec grille 3 colonnes, plus lisible qu'un tableau
+  compressé à 10 colonnes sur un petit écran.
 
 ### Note technique — mode Image
 La pixelisation est faite par canvas : l'image source est redessinée en très basse résolution
