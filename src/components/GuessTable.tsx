@@ -23,7 +23,7 @@ function arrowFor(status: string) {
 }
 
 export default function GuessTable({ guesses }: GuessTableProps) {
-  const { lang } = useLanguage();
+  const { lang, ui } = useLanguage();
 
   if (guesses.length === 0) return null;
 
@@ -41,7 +41,7 @@ export default function GuessTable({ guesses }: GuessTableProps) {
         </colgroup>
         <thead>
           <tr>
-            <th className="px-1 py-2 text-zinc-400" />
+            <th className="px-1 py-2 text-left text-xs text-zinc-400">{ui.characterColumn}</th>
             {ATTRIBUTE_KEYS.map((key) => (
               <th key={key} className="px-1 py-2 text-xs text-zinc-400">
                 {ATTRIBUTE_LABELS[lang][key]}
@@ -70,7 +70,7 @@ export default function GuessTable({ guesses }: GuessTableProps) {
                 return (
                   <td
                     key={key}
-                    style={{ animationDelay: `${i * 60}ms` }}
+                    style={{ animationDelay: `${i * 140}ms` }}
                     className={`animate-attribute-reveal rounded-lg px-1.5 py-2 text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
                   >
                     {translateValue(lang, attr.value)}
@@ -104,7 +104,7 @@ export default function GuessTable({ guesses }: GuessTableProps) {
                 return (
                   <div
                     key={key}
-                    style={{ animationDelay: `${i * 60}ms` }}
+                    style={{ animationDelay: `${i * 140}ms` }}
                     className={`animate-attribute-reveal rounded-md px-1.5 py-1.5 text-center text-[11px] font-medium ${CELL_STYLES[attr.status]}`}
                   >
                     <div className="text-[9px] uppercase opacity-80">{ATTRIBUTE_LABELS[lang][key]}</div>

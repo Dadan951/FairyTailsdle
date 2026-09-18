@@ -112,6 +112,7 @@ export function translateValue(lang: Lang, value: string): string {
 
 export const UI_TEXT = {
   fr: {
+    characterColumn: "Personnage",
     searchPlaceholder: "Nom d'un personnage Fairy Tail...",
     subtitle: (n: number) => `Devine le personnage Fairy Tail du jour #${n}`,
     practiceSubtitle: "Partie bonus — ne compte pas dans le défi du jour",
@@ -140,6 +141,7 @@ export const UI_TEXT = {
     footerCredit: "Créé en solo par Ahmed Yahyaoui.",
   },
   en: {
+    characterColumn: "Character",
     searchPlaceholder: "Fairy Tail character name...",
     subtitle: (n: number) => `Guess today's Fairy Tail character #${n}`,
     practiceSubtitle: "Bonus round — doesn't count toward today's challenge",
