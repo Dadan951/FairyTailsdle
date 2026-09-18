@@ -59,6 +59,10 @@ Le tableau d'attributs (Classic) est responsive et **sans aucune barre de défil
 - Mobile (< `sm`) : cartes par tentative avec grille 3 colonnes, plus lisible qu'un tableau
   compressé à 10 colonnes sur un petit écran.
 
+Avatar du personnage agrandi dans le tableau (48px desktop / 44px mobile, avec liseré).
+Le mode "Partie bonus" (après Rejouer) a un vrai badge visuel (`PracticeBadge.tsx`, pilule
+dégradée doré/orange avec icône 🎲) au lieu d'un simple texte.
+
 ### Note technique — mode Image
 La pixelisation est faite par canvas : l'image source est redessinée en très basse résolution
 (quelques blocs) puis remise à l'échelle sans lissage (`imageSmoothingEnabled = false`), ce qui

@@ -34,7 +34,7 @@ export default function GuessTable({ guesses }: GuessTableProps) {
       {/* Desktop / tablette : une ligne par tentative */}
       <table className="hidden w-full table-fixed border-separate border-spacing-2 text-center text-sm sm:table">
         <colgroup>
-          <col className="w-40" />
+          <col className="w-48" />
           {ATTRIBUTE_KEYS.map((key) => (
             <col key={key} />
           ))}
@@ -52,14 +52,14 @@ export default function GuessTable({ guesses }: GuessTableProps) {
         <tbody>
           {reversed.map((guess) => (
             <tr key={guess.character.id} className="animate-card-reveal">
-              <td className="rounded-lg bg-zinc-900 px-2 py-2 text-left font-semibold text-zinc-50">
-                <div className="flex items-center gap-2">
+              <td className="rounded-lg bg-zinc-900 px-2 py-2.5 text-left font-semibold text-zinc-50">
+                <div className="flex items-center gap-3">
                   <Image
                     src={guess.character.image}
                     alt={guess.character.name}
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 flex-shrink-0 rounded-full object-cover"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 flex-shrink-0 rounded-full object-cover ring-2 ring-zinc-700"
                     unoptimized
                   />
                   <span className="truncate text-sm">{guess.character.name}</span>
@@ -91,9 +91,9 @@ export default function GuessTable({ guesses }: GuessTableProps) {
               <Image
                 src={guess.character.image}
                 alt={guess.character.name}
-                width={36}
-                height={36}
-                className="h-9 w-9 flex-shrink-0 rounded-full object-cover"
+                width={44}
+                height={44}
+                className="h-11 w-11 flex-shrink-0 rounded-full object-cover ring-2 ring-zinc-700"
                 unoptimized
               />
               <span className="font-semibold text-zinc-50">{guess.character.name}</span>

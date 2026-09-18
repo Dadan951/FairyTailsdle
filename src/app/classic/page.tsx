@@ -11,6 +11,7 @@ import CharacterSearch from "@/components/CharacterSearch";
 import GuessTable from "@/components/GuessTable";
 import HintPanel from "@/components/HintPanel";
 import Button from "@/components/Button";
+import PracticeBadge from "@/components/PracticeBadge";
 
 /** Une case par essai (pas par attribut) : plus lisible qu'une grille de 12 colonnes. */
 function guessScoreEmoji(guess: GuessResult): string {
@@ -135,10 +136,12 @@ export default function ClassicPage() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center gap-6 px-4 py-10 text-zinc-50">
-      <header className="flex flex-col items-center gap-1 text-center">
-        <p className="text-sm text-zinc-400">
-          {isPracticing ? ui.practiceSubtitle : ui.subtitle(puzzleNumber)}
-        </p>
+      <header className="flex flex-col items-center gap-2 text-center">
+        {isPracticing ? (
+          <PracticeBadge label={ui.practiceSubtitle} />
+        ) : (
+          <p className="text-sm text-zinc-400">{ui.subtitle(puzzleNumber)}</p>
+        )}
       </header>
 
       {!session.finished && (
