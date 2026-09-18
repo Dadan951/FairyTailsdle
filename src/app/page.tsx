@@ -11,12 +11,12 @@ import GuessTable from "@/components/GuessTable";
 import HintPanel from "@/components/HintPanel";
 import Button from "@/components/Button";
 
-const EMOJI: Record<string, string> = {
-  correct: "🟩",
-  incorrect: "🟥",
-  higher: "🟨",
-  lower: "🟨",
-};
+/** Une case par essai (pas par attribut) : plus lisible qu'une grille de 12 colonnes. */
+function guessScoreEmoji(guess: GuessResult): string {
+  if (guess.isCorrect) return "🟩";
+  const correctCount = ATTRIBUTE_KEYS.filter((key) => guess.attributes[key].status === "correct").length;
+  return correctCount >= ATTRIBUTE_KEYS.length / 2 ? "🟨" : "🟥";
+}
 
 interface Session {
   guesses: GuessResult[];
@@ -107,15 +107,16 @@ export default function Home() {
   }
 
   function handleShare() {
-    const lines = session.guesses.map((g) =>
-      ATTRIBUTE_KEYS.map((key) => EMOJI[g.attributes[key].status]).join("")
-    );
+    const scoreLine = session.guesses.map(guessScoreEmoji).join("");
     const text = [
       `FairyTailsdle #${puzzleNumber}`,
       session.won
-        ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""} 🎉`
+        ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""}`
         : "Pas trouvé aujourd'hui 😔",
-      ...lines,
+      "",
+      scoreLine,
+      "",
+      "🟩 bonne réponse  🟨 proche  🟥 loin",
     ].join("\n");
 
     navigator.clipboard.writeText(text).then(
@@ -139,7 +140,7 @@ export default function Home() {
         <p className="text-sm text-zinc-400">
           {isPracticing
             ? "Partie bonus — ne compte pas dans le défi du jour"
-            : `Devine le personnage Fairy Tail du jour — Puzzle #${puzzleNumber}`}
+            : `Devine le personnage Fairy Tail du jour #${puzzleNumber}`}
         </p>
       </header>
 
@@ -164,7 +165,7 @@ export default function Home() {
             unoptimized
           />
           <p className="text-lg font-bold">
-            {session.won ? "🎉 Bien joué !" : "Dommage !"} C&apos;était{" "}
+            {session.won ? "Bien joué !" : "Dommage !"} C&apos;était{" "}
             <span className="text-pink-400">{answer.name}</span>
           </p>
           <div className="flex gap-3">

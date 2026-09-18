@@ -20,7 +20,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 ### Progression / social
 - Pas de compte utilisateur, pas de backend.
 - Streak/historique calculés et stockés en local (localStorage) — pas affichés dans l'UI pour l'instant (retiré pour épurer la page principale).
-- Partage de résultat façon Wordle (grille emoji copiable dans le presse-papier).
+- Partage de résultat façon Wordle : une case emoji par essai (🟩 bonne réponse, 🟨 proche, 🟥 loin) avec légende, copiable dans le presse-papier — pas une grille par attribut (illisible à plus de quelques essais).
 - Bouton "Rejouer" après une victoire/défaite : relance une partie bonus avec un personnage aléatoire, sans toucher à la sauvegarde ni aux stats du défi du jour (un seul défi officiel compte par jour).
 
 ### Stack technique
@@ -36,7 +36,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
   - **Saga anime d'apparition** (en plus du premier arc manga)
 - Source : wiki Fairy Tail (fandom.com), infos et images récupérées via l'API MediaWiki (hotlink direct).
 - Droits d'image : images fan-content non-officielles. **Décision : le site restera toujours gratuit, en accès libre, sans compte ni monétisation** — usage non-commercial confirmé durablement, pas seulement le temps du développement.
-- Fond de page : wallpaper fan-art "Wallpaper by Inusuki | Fairy Tail © Hiro Mashima" (`public/background.jpg`), crédit affiché sur le site.
+- Fond de page : wallpaper fan-art "Wallpaper by Inusuki | Fairy Tail © Hiro Mashima" (`public/background.jpg`). Crédit non affiché sur le site (retiré à la demande) mais documenté ici.
 
 ### Hébergement
 - Vercel (cohérent avec le choix Next.js).

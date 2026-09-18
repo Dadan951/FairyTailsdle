@@ -30,9 +30,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </div>
         <div className="fixed inset-0 -z-10 bg-zinc-950/80" />
         {children}
-        <p className="pointer-events-none fixed bottom-1 right-2 text-[10px] text-zinc-500">
-          Wallpaper by Inusuki — Fairy Tail © Hiro Mashima
-        </p>
       </body>
     </html>
   );

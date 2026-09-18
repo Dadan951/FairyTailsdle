@@ -7,7 +7,7 @@ import {
   ORDINAL_ATTRIBUTES,
 } from "@/lib/types";
 
-const LAUNCH_DATE = new Date("2026-01-01T00:00:00Z");
+const LAUNCH_DATE = new Date("2026-09-17T00:00:00Z");
 
 /** Chaîne AAAA-MM-JJ dans le fuseau local du joueur, utilisée comme clé du jour. */
 export function getTodayKey(date: Date = new Date()): string {
