@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FairyTailsdle — Devine le personnage Fairy Tail du jour",
+  title: "FairyTailsdle : Devine le personnage Fairy Tail du jour",
   description: "Un jeu quotidien type Wordle pour deviner les personnages de Fairy Tail.",
 };
 
