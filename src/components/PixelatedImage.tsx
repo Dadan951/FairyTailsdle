@@ -10,8 +10,13 @@ interface PixelatedImageProps {
 }
 
 const CANVAS_SIZE = 280;
-/** Nombre de blocs de pixels visibles au niveau le plus flou / le plus net. */
-const MIN_BLOCKS = 4;
+/**
+ * Nombre de blocs de pixels visibles au niveau le plus flou / le plus net.
+ * MIN_BLOCKS=4 était trop extrême : à ce niveau l'image n'est qu'une bouillie de
+ * couleurs moyennées, méconnaissable au point de sembler être un personnage différent
+ * une fois plus nette. 10 garde un vrai défi tout en laissant deviner une silhouette.
+ */
+const MIN_BLOCKS = 10;
 const MAX_BLOCKS = 90;
 
 function drawPixelated(image: HTMLImageElement, canvas: HTMLCanvasElement, blocks: number) {

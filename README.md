@@ -69,6 +69,12 @@ La pixelisation est faite par canvas : l'image source est redessinée en très b
 donne l'effet "gros pixels". Le nombre de blocs augmente avec le nombre d'essais ratés, donc
 l'image devient de plus en plus nette (voir `PixelatedImage.tsx`).
 
+⚠️ Vérifié explicitement (pas de bug) : le personnage reste le même du début à la fin d'une
+manche — seule sa netteté change. Le niveau de départ (`MIN_BLOCKS`) était fixé à 4, tellement
+extrême que l'image ressemblait à des taches de couleur aléatoires, donnant l'impression trompeuse
+que le personnage changeait une fois l'image plus nette. Remonté à 10 pour rester un vrai défi
+tout en laissant deviner une silhouette dès le départ.
+
 ---
 
 ## Développement
