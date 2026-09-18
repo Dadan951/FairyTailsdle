@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { characters } from "@/data/characters";
+import { useLanguage } from "@/context/LanguageContext";
 import { compareGuess, getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
 import { DailyState, loadDailyState, loadStats, recordResult, saveDailyState, Stats } from "@/lib/storage";
 import { ATTRIBUTE_KEYS, Character, GuessResult } from "@/lib/types";
@@ -33,6 +34,7 @@ function pickRandomCharacter(excludeId: number): Character {
 }
 
 export default function Home() {
+  const { ui } = useLanguage();
   const today = useMemo(() => new Date(), []);
   const dateKey = useMemo(() => getTodayKey(today), [today]);
   const puzzleNumber = useMemo(() => getPuzzleNumber(today), [today]);
@@ -110,13 +112,11 @@ export default function Home() {
     const scoreLine = session.guesses.map(guessScoreEmoji).join("");
     const text = [
       `FairyTailsdle #${puzzleNumber}`,
-      session.won
-        ? `Trouvé en ${session.guesses.length} essai${session.guesses.length > 1 ? "s" : ""}`
-        : "Pas trouvé aujourd'hui 😔",
+      session.won ? ui.shareFoundIn(session.guesses.length) : ui.shareNotFound,
       "",
       scoreLine,
       "",
-      "🟩 bonne réponse  🟨 proche  🟥 loin",
+      ui.shareLegend,
     ].join("\n");
 
     navigator.clipboard.writeText(text).then(
@@ -126,7 +126,7 @@ export default function Home() {
       },
       () => {
         // Presse-papier indisponible (permissions navigateur) : on affiche le résultat pour copie manuelle.
-        window.prompt("Copie ton résultat :", text);
+        window.prompt(ui.sharePromptTitle, text);
       }
     );
   }
@@ -138,9 +138,7 @@ export default function Home() {
       <header className="flex flex-col items-center gap-1 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
         <p className="text-sm text-zinc-400">
-          {isPracticing
-            ? "Partie bonus — ne compte pas dans le défi du jour"
-            : `Devine le personnage Fairy Tail du jour #${puzzleNumber}`}
+          {isPracticing ? ui.practiceSubtitle : ui.subtitle(puzzleNumber)}
         </p>
       </header>
 
@@ -165,15 +163,15 @@ export default function Home() {
             unoptimized
           />
           <p className="text-lg font-bold">
-            {session.won ? "Bien joué !" : "Dommage !"} C&apos;était{" "}
+            {session.won ? ui.won : ui.lost} {ui.itWas}{" "}
             <span className="text-pink-400">{answer.name}</span>
           </p>
           <div className="flex gap-3">
             <Button variant="primary" onClick={handleShare}>
-              {copied ? "Copié !" : "Partager mon résultat"}
+              {copied ? ui.copied : ui.share}
             </Button>
             <Button variant="secondary" onClick={handleReplay}>
-              Rejouer
+              {ui.replay}
             </Button>
           </div>
         </div>

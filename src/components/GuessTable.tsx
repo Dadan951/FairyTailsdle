@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
-import { ATTRIBUTE_KEYS, ATTRIBUTE_LABELS, GuessResult } from "@/lib/types";
+import { useLanguage } from "@/context/LanguageContext";
+import { ATTRIBUTE_LABELS, translateValue } from "@/lib/i18n";
+import { ATTRIBUTE_KEYS, GuessResult } from "@/lib/types";
 
 interface GuessTableProps {
   guesses: GuessResult[];
@@ -19,6 +23,8 @@ function arrowFor(status: string) {
 }
 
 export default function GuessTable({ guesses }: GuessTableProps) {
+  const { lang } = useLanguage();
+
   if (guesses.length === 0) return null;
 
   return (
@@ -39,18 +45,20 @@ export default function GuessTable({ guesses }: GuessTableProps) {
             />
             <span className="font-semibold text-zinc-50">{guess.character.name}</span>
           </div>
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+          <div className="flex gap-1.5 overflow-x-auto pb-1">
             {ATTRIBUTE_KEYS.map((key, i) => {
               const attr = guess.attributes[key];
               return (
                 <div
                   key={key}
                   style={{ animationDelay: `${i * 60}ms` }}
-                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
+                  className={`animate-attribute-reveal min-w-[92px] flex-shrink-0 rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
                 >
-                  <div className="text-[10px] uppercase opacity-80">{ATTRIBUTE_LABELS[key]}</div>
+                  <div className="text-[10px] uppercase opacity-80">
+                    {ATTRIBUTE_LABELS[lang][key]}
+                  </div>
                   <div>
-                    {attr.value}
+                    {translateValue(lang, attr.value)}
                     {arrowFor(attr.status)}
                   </div>
                 </div>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import { LanguageProvider } from "@/context/LanguageContext";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,7 +31,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Image src="/background.jpg" alt="" fill priority className="object-cover" />
         </div>
         <div className="fixed inset-0 -z-10 bg-zinc-950/80" />
-        {children}
+        <LanguageProvider>
+          <LanguageSwitcher />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 import { Character } from "@/lib/types";
 
 interface CharacterSearchProps {
@@ -17,6 +18,7 @@ export default function CharacterSearch({
   disabled,
   onGuess,
 }: CharacterSearchProps) {
+  const { ui } = useLanguage();
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -47,7 +49,7 @@ export default function CharacterSearch({
         }}
         onFocus={() => setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
-        placeholder="Nom d'un personnage Fairy Tail..."
+        placeholder={ui.searchPlaceholder}
         className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-zinc-50 placeholder-zinc-500 outline-none transition-colors focus:border-pink-500 disabled:opacity-50"
       />
       {open && results.length > 0 && (

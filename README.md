@@ -26,6 +26,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 ### Stack technique
 - **Next.js** (React, TypeScript, App Router, Tailwind CSS, ESLint) — pas de backend, pas de compte.
 - Déploiement sur **Vercel**.
+- Internationalisation FR/EN maison (`src/lib/i18n.ts` + `LanguageContext`) : sélecteur en haut à droite, préférence sauvegardée en localStorage. Traduit les textes de l'interface et les valeurs d'attributs (genre, race, couleurs, magie, statut, arcs/sagas...). Les noms des personnages ne sont **pas** traduits (identiques dans le doublage français officiel).
 
 ### Données des personnages
 - Format : JSON local (un fichier par personnage ou un fichier unique liste).
@@ -42,7 +43,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Mode Classic jouable avec indices intégrés — Citation/Image floutée/Emoji à venir.
+Mode Classic jouable avec indices intégrés, FR/EN et attributs sur une ligne scrollable — Citation/Image floutée/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
 
 ---

@@ -1,5 +1,9 @@
-import { AttributeKey, ATTRIBUTE_LABELS, Character } from "@/lib/types";
+"use client";
+
+import { useLanguage } from "@/context/LanguageContext";
+import { ATTRIBUTE_LABELS, translateValue } from "@/lib/i18n";
 import { guessesUntilNextHint, HINT_ATTRIBUTES, unlockedHintCount } from "@/lib/hints";
+import { AttributeKey, Character } from "@/lib/types";
 
 interface HintPanelProps {
   answer: Character;
@@ -7,15 +11,14 @@ interface HintPanelProps {
 }
 
 export default function HintPanel({ answer, guessCount }: HintPanelProps) {
+  const { lang, ui } = useLanguage();
   const unlocked = unlockedHintCount(guessCount);
   const remaining = guessesUntilNextHint(guessCount);
 
   return (
     <div className="flex w-full max-w-lg flex-col gap-2 rounded-lg border border-zinc-800 bg-zinc-900 p-4">
       <p className="text-center text-sm text-zinc-400">
-        {unlocked >= HINT_ATTRIBUTES.length
-          ? "Tous les indices sont débloqués"
-          : `Prochain indice dans ${remaining} essai${remaining > 1 ? "s" : ""}`}
+        {unlocked >= HINT_ATTRIBUTES.length ? ui.allHintsUnlocked : ui.nextHintIn(remaining)}
       </p>
       <div className="flex flex-wrap justify-center gap-2">
         {HINT_ATTRIBUTES.map((key: AttributeKey, i) => {
@@ -29,7 +32,7 @@ export default function HintPanel({ answer, guessCount }: HintPanelProps) {
                   : "bg-zinc-800 text-zinc-400"
               }`}
             >
-              {ATTRIBUTE_LABELS[key]} : {isUnlocked ? answer[key] : "???"}
+              {ATTRIBUTE_LABELS[lang][key]} : {isUnlocked ? translateValue(lang, answer[key]) : "???"}
             </span>
           );
         })}
