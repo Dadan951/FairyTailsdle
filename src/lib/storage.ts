@@ -1,4 +1,4 @@
-export type GameMode = "classic" | "indices";
+export type GameMode = "classic" | "indices" | "image";
 
 const DAILY_KEY_PREFIX = "ftdle-day-";
 const STATS_KEY_PREFIX = "ftdle-stats-";

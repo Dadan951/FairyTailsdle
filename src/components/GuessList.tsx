@@ -6,7 +6,7 @@ export default function GuessList({ guesses }: GuessListProps) {
   if (guesses.length === 0) return null;
 
   return (
-    <ul className="flex w-full max-w-md flex-col gap-2">
+    <ul className="animate-card-reveal flex w-full max-w-lg flex-col gap-2">
       {[...guesses].reverse().map((g, i) => (
         <li
           key={`${g.name}-${i}`}

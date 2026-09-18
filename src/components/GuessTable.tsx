@@ -45,14 +45,14 @@ export default function GuessTable({ guesses }: GuessTableProps) {
             />
             <span className="font-semibold text-zinc-50">{guess.character.name}</span>
           </div>
-          <div className="flex gap-1.5 overflow-x-auto pb-1">
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
             {ATTRIBUTE_KEYS.map((key, i) => {
               const attr = guess.attributes[key];
               return (
                 <div
                   key={key}
                   style={{ animationDelay: `${i * 60}ms` }}
-                  className={`animate-attribute-reveal min-w-[92px] flex-shrink-0 rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
+                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
                 >
                   <div className="text-[10px] uppercase opacity-80">
                     {ATTRIBUTE_LABELS[lang][key]}

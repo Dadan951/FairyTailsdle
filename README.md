@@ -11,11 +11,14 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Le Fairy Tail dle existant (Mangadle.net) n'a qu'un seul mode (Classic), ~122 personnages, un design template générique, et pas de fonctionnalités sociales au-delà d'un streak en local storage.
 - **Angle choisi : faire mieux** (design/UX, plus de modes, data plus riche, progression locale plus poussée) plutôt que viser un univers vierge.
 
-### Modes de jeu prévus
-- [x] Classic (tableau d'attributs, avec en plus un système d'indices intégré : un indice supplémentaire — guilde, cheveux, genre, magie, race, statut — se débloque tous les 3 essais ratés)
+### Écran d'accueil
+Page `/` avec sélection du mode (cartes à la Narutodle), chaque mode ayant sa propre route :
+- [x] **Classic** (`/classic`) — tableau d'attributs, avec indices intégrés (guilde, cheveux, genre) débloqués tous les 3 essais ratés
+- [x] **Image** (`/image`) — image du personnage pixelisée, qui se dépixelise progressivement à chaque essai raté (netteté complète après 8 essais), révélée en clair à la victoire
 - [ ] Citation (deviner via une réplique célèbre)
-- [ ] Image floutée/zoomée (dézoom ou défloutage progressif à chaque essai)
 - [ ] Emoji (deviner via une suite d'emojis représentant le perso)
+
+Les deux modes actifs partagent le même personnage du jour (calculé par date) — seule la façon de le deviner change.
 
 ### Progression / social
 - Pas de compte utilisateur, pas de backend.
@@ -43,8 +46,14 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Mode Classic jouable avec indices intégrés, FR/EN et attributs sur une ligne scrollable — Citation/Image floutée/Emoji à venir.
+Écran d'accueil avec 2 modes jouables (Classic, Image pixelisée), FR/EN — Citation/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
+
+### Note technique — mode Image
+La pixelisation est faite par canvas : l'image source est redessinée en très basse résolution
+(quelques blocs) puis remise à l'échelle sans lissage (`imageSmoothingEnabled = false`), ce qui
+donne l'effet "gros pixels". Le nombre de blocs augmente avec le nombre d'essais ratés, donc
+l'image devient de plus en plus nette (voir `PixelatedImage.tsx`).
 
 ---
 
