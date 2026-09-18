@@ -28,8 +28,8 @@ export default function GuessTable({ guesses }: GuessTableProps) {
   if (guesses.length === 0) return null;
 
   return (
-    <div className="w-full max-w-4xl overflow-x-auto rounded-lg">
-      <table className="w-full min-w-[900px] border-separate border-spacing-1 text-center text-sm">
+    <div className="w-full max-w-6xl overflow-x-auto rounded-lg">
+      <table className="w-full min-w-[760px] border-separate border-spacing-1 text-center text-sm">
         <thead>
           <tr>
             <th className="sticky left-0 bg-zinc-950 px-2 py-2 text-zinc-400">

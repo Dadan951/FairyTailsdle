@@ -21,11 +21,8 @@ export interface Character {
 
 export const ATTRIBUTE_KEYS = [
   "gender",
-  "race",
   "hairColor",
-  "eyeColor",
   "magicAttribute",
-  "magicType",
   "weapon",
   "occupation",
   "affiliation",

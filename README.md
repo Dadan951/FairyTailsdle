@@ -33,11 +33,10 @@ Les deux modes actifs partagent le même personnage du jour (calculé par date) 
 
 ### Données des personnages
 - Format : JSON local (un fichier par personnage ou un fichier unique liste).
-- Attributs Classic :
-  - Nom, Genre, Race, Couleur cheveux, Couleur yeux, Attribut magique, Arme, Occupation, Affiliation, Premier arc (base identique à l'existant)
-  - **Statut** (vivant / mort)
-  - **Type de magie** (Caster / Holder)
-  - **Saga anime d'apparition** (en plus du premier arc manga)
+- Attributs affichés en mode Classic (9, tenant sur une seule ligne sans défilement, tableau
+  élargi à `max-w-6xl`) : Genre, Couleur cheveux, Attribut magique, Arme, Occupation, Guilde,
+  Statut, Premier arc, Saga. Race, Couleur yeux et Type de magie (Caster/Holder) existent dans
+  les données mais ne sont plus affichés (retirés pour que le tableau tienne sur une ligne).
 - Source : wiki Fairy Tail (fandom.com), infos et images récupérées via l'API MediaWiki (hotlink direct).
 - Droits d'image : images fan-content non-officielles. **Décision : le site restera toujours gratuit, en accès libre, sans compte ni monétisation** — usage non-commercial confirmé durablement, pas seulement le temps du développement.
 - Fond de page : wallpaper fan-art "Wallpaper by Inusuki | Fairy Tail © Hiro Mashima" (`public/background.jpg`). Crédit non affiché sur le site (retiré à la demande) mais documenté ici.
@@ -46,9 +45,11 @@ Les deux modes actifs partagent le même personnage du jour (calculé par date) 
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Vraie barre de navigation (`Navbar.tsx`, sticky en haut de chaque page) : logo cliquable vers
-l'accueil, liens vers les modes avec état actif, sélecteur FR/EN intégré. Écran d'accueil avec
-2 modes jouables (Classic, Image pixelisée), FR/EN, responsive mobile — Citation/Emoji à venir.
+En-tête épuré (`Navbar.tsx`, sticky) : juste un menu hamburger, le logo et le sélecteur FR/EN.
+Le menu ouvre un panneau latéral (sidebar) depuis la gauche avec les liens Accueil/Classic/Image.
+Pied de page (`Footer.tsx`) avec une courte explication du site et le crédit du créateur, sans
+mention de la stack technique. Écran d'accueil avec 2 modes jouables (Classic, Image pixelisée),
+FR/EN, responsive mobile — Citation/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
 Le tableau d'attributs (Classic) est en une seule ligne par tentative avec une colonne
 personnage fixe (`sticky`) et un unique défilement horizontal pour tout le tableau.
