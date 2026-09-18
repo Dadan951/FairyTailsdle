@@ -46,8 +46,9 @@ Les deux modes actifs partagent le même personnage du jour (calculé par date) 
 - Vercel (cohérent avec le choix Next.js).
 
 ## Statut
-Écran d'accueil (sans icônes, juste titre + description par mode) avec 2 modes jouables (Classic,
-Image pixelisée), FR/EN, responsive mobile — Citation/Emoji à venir.
+Vraie barre de navigation (`Navbar.tsx`, sticky en haut de chaque page) : logo cliquable vers
+l'accueil, liens vers les modes avec état actif, sélecteur FR/EN intégré. Écran d'accueil avec
+2 modes jouables (Classic, Image pixelisée), FR/EN, responsive mobile — Citation/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
 Le tableau d'attributs (Classic) est en une seule ligne par tentative avec une colonne
 personnage fixe (`sticky`) et un unique défilement horizontal pour tout le tableau.

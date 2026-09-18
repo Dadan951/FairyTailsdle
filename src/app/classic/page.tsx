@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { characters } from "@/data/characters";
 import { useLanguage } from "@/context/LanguageContext";
 import { compareGuess, getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
@@ -137,13 +136,9 @@ export default function ClassicPage() {
   return (
     <div className="relative flex min-h-screen flex-col items-center gap-6 px-4 py-10 text-zinc-50">
       <header className="flex flex-col items-center gap-1 text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
         <p className="text-sm text-zinc-400">
           {isPracticing ? ui.practiceSubtitle : ui.subtitle(puzzleNumber)}
         </p>
-        <Link href="/" className="mt-1 text-xs text-zinc-500 transition-colors hover:text-pink-400">
-          {ui.backToModes}
-        </Link>
       </header>
 
       {!session.finished && (

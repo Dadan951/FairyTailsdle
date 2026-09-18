@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import { LanguageProvider } from "@/context/LanguageContext";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </div>
         <div className="fixed inset-0 -z-10 bg-zinc-950/80" />
         <LanguageProvider>
-          <LanguageSwitcher />
+          <Navbar />
           {children}
         </LanguageProvider>
       </body>
