@@ -5,7 +5,7 @@ import Image from "next/image";
 import { characters } from "@/data/characters";
 import { compareGuess, getPuzzleNumber, getTodayCharacter, getTodayKey } from "@/lib/game";
 import { DailyState, loadDailyState, loadStats, recordResult, saveDailyState, Stats } from "@/lib/storage";
-import { ATTRIBUTE_KEYS, GuessResult } from "@/lib/types";
+import { ATTRIBUTE_KEYS, Character, GuessResult } from "@/lib/types";
 import CharacterSearch from "@/components/CharacterSearch";
 import GuessTable from "@/components/GuessTable";
 import HintPanel from "@/components/HintPanel";
@@ -26,11 +26,22 @@ interface Session {
 
 const EMPTY_SESSION: Session = { guesses: [], finished: false, won: false, stats: null };
 
+function pickRandomCharacter(excludeId: number): Character {
+  const pool = characters.filter((c) => c.id !== excludeId);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
 export default function Home() {
   const today = useMemo(() => new Date(), []);
   const dateKey = useMemo(() => getTodayKey(today), [today]);
   const puzzleNumber = useMemo(() => getPuzzleNumber(today), [today]);
-  const answer = useMemo(() => getTodayCharacter(today), [today]);
+  const dailyAnswer = useMemo(() => getTodayCharacter(today), [today]);
+
+  // Une fois le défi du jour trouvé, "Rejouer" bascule sur un personnage aléatoire
+  // pour une partie bonus, sans toucher à la sauvegarde/aux stats du défi du jour.
+  const [practiceAnswer, setPracticeAnswer] = useState<Character | null>(null);
+  const answer = practiceAnswer ?? dailyAnswer;
+  const isPracticing = practiceAnswer !== null;
 
   // Le rendu serveur/premier rendu client démarre vide (localStorage n'existe pas côté serveur,
   // donc on ne peut pas le lire dans l'état initial sans provoquer un mismatch d'hydratation).
@@ -42,7 +53,7 @@ export default function Home() {
     const restoredGuesses = daily.guessIds
       .map((id) => characters.find((c) => c.id === id))
       .filter((c): c is NonNullable<typeof c> => Boolean(c))
-      .map((c) => compareGuess(c, answer));
+      .map((c) => compareGuess(c, dailyAnswer));
 
     // eslint-disable-next-line react-hooks/set-state-in-effect -- synchronisation ponctuelle avec localStorage (indisponible côté serveur), pas de source de vérité React alternative ici.
     setSession({
@@ -72,17 +83,26 @@ export default function Home() {
     const nextGuesses = [...session.guesses, result];
 
     if (result.isCorrect) {
-      persist(nextGuesses, true, true);
+      if (!isPracticing) {
+        persist(nextGuesses, true, true);
+      }
       setSession({
         guesses: nextGuesses,
         finished: true,
         won: true,
-        stats: recordResult("classic", dateKey, true, nextGuesses.length),
+        stats: isPracticing ? session.stats : recordResult("classic", dateKey, true, nextGuesses.length),
       });
     } else {
-      persist(nextGuesses, false, false);
+      if (!isPracticing) {
+        persist(nextGuesses, false, false);
+      }
       setSession((prev) => ({ ...prev, guesses: nextGuesses }));
     }
+  }
+
+  function handleReplay() {
+    setPracticeAnswer(pickRandomCharacter(answer.id));
+    setSession((prev) => ({ ...prev, guesses: [], finished: false, won: false }));
   }
 
   function handleShare() {
@@ -115,7 +135,11 @@ export default function Home() {
     <div className="relative flex min-h-screen flex-col items-center gap-6 px-4 py-10 text-zinc-50">
       <header className="flex flex-col items-center gap-1 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-pink-400">FairyTailsdle</h1>
-        <p className="text-sm text-zinc-400">Devine le personnage Fairy Tail du jour — Puzzle #{puzzleNumber}</p>
+        <p className="text-sm text-zinc-400">
+          {isPracticing
+            ? "Partie bonus — ne compte pas dans le défi du jour"
+            : `Devine le personnage Fairy Tail du jour — Puzzle #${puzzleNumber}`}
+        </p>
       </header>
 
       {!session.finished && (
@@ -142,12 +166,20 @@ export default function Home() {
             {session.won ? "🎉 Bien joué !" : "Dommage !"} C&apos;était{" "}
             <span className="text-pink-400">{answer.name}</span>
           </p>
-          <button
-            onClick={handleShare}
-            className="rounded-full bg-pink-600 px-5 py-2 font-semibold text-white transition-colors hover:bg-pink-500"
-          >
-            {copied ? "Copié !" : "Partager mon résultat"}
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={handleShare}
+              className="rounded-full bg-pink-600 px-5 py-2 font-semibold text-white transition-colors hover:bg-pink-500"
+            >
+              {copied ? "Copié !" : "Partager mon résultat"}
+            </button>
+            <button
+              onClick={handleReplay}
+              className="rounded-full border border-zinc-700 px-5 py-2 font-semibold text-zinc-200 transition-colors hover:bg-zinc-800"
+            >
+              Rejouer
+            </button>
+          </div>
         </div>
       )}
 

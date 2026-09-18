@@ -21,6 +21,7 @@ Objectif : proposer une meilleure exécution que les sites existants (ex. Mangad
 - Pas de compte utilisateur, pas de backend.
 - Streak/historique calculés et stockés en local (localStorage) — pas affichés dans l'UI pour l'instant (retiré pour épurer la page principale).
 - Partage de résultat façon Wordle (grille emoji copiable dans le presse-papier).
+- Bouton "Rejouer" après une victoire/défaite : relance une partie bonus avec un personnage aléatoire, sans toucher à la sauvegarde ni aux stats du défi du jour (un seul défi officiel compte par jour).
 
 ### Stack technique
 - **Next.js** (React, TypeScript, App Router, Tailwind CSS, ESLint) — pas de backend, pas de compte.
