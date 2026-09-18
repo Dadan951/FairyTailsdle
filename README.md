@@ -47,9 +47,10 @@ Les deux modes actifs partagent le même personnage du jour (calculé par date) 
 ## Statut
 En-tête épuré (`Navbar.tsx`, sticky) : juste un menu hamburger, le logo et le sélecteur FR/EN.
 Le menu ouvre un panneau latéral (sidebar) depuis la gauche avec les liens Accueil/Classic/Image.
-Pied de page (`Footer.tsx`) avec une courte explication du site et le crédit du créateur, sans
-mention de la stack technique. Écran d'accueil avec 2 modes jouables (Classic, Image pixelisée),
-FR/EN, responsive mobile — Citation/Emoji à venir.
+Pied de page (`Footer.tsx`) fixe en bas de l'écran (toujours visible, pas besoin de scroller) :
+juste le crédit "Développé par Ahmed Yahyaoui", sans texte de présentation ni mention de la
+stack technique. Écran d'accueil avec 2 modes jouables (Classic, Image pixelisée), FR/EN,
+responsive mobile — Citation/Emoji à venir.
 La recherche de personnage (autocomplete) affiche une miniature à côté de chaque nom.
 
 Le tableau d'attributs (Classic) est responsive et **sans aucune barre de défilement** :

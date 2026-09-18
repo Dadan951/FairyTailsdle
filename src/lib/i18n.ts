@@ -136,9 +136,7 @@ export const UI_TEXT = {
     imageModeDesc: "Devine avec une image pixelisée",
     imageSubtitle: (n: number) => `Devine le personnage grâce à l'image #${n}`,
     pixelHint: (level: number, max: number) => `Netteté ${level}/${max}`,
-    footerAbout:
-      "FairyTailsdle est un petit jeu quotidien où il faut deviner le personnage de Fairy Tail du jour, avec plusieurs façons de jouer. Nouveau personnage chaque jour, gratuit et sans compte.",
-    footerCredit: "Créé en solo par Ahmed Yahyaoui.",
+    footerCredit: "Développé par Ahmed Yahyaoui",
   },
   en: {
     characterColumn: "Character",
@@ -165,8 +163,6 @@ export const UI_TEXT = {
     imageModeDesc: "Guess from a pixelated image",
     imageSubtitle: (n: number) => `Guess the character from the image #${n}`,
     pixelHint: (level: number, max: number) => `Sharpness ${level}/${max}`,
-    footerAbout:
-      "FairyTailsdle is a small daily game where you guess today's Fairy Tail character, with several ways to play. New character every day, free, no account needed.",
-    footerCredit: "Built solo by Ahmed Yahyaoui.",
+    footerCredit: "Developed by Ahmed Yahyaoui",
   },
 } satisfies Record<Lang, Record<string, unknown>>;

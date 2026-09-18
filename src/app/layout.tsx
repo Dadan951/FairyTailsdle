@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="relative min-h-full flex flex-col">
+      <body className="relative min-h-full flex flex-col pb-12">
         <div className="fixed inset-0 -z-20">
           <Image src="/background.jpg" alt="" fill priority className="object-cover" />
         </div>
