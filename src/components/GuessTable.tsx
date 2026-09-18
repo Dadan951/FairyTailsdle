@@ -22,9 +22,12 @@ export default function GuessTable({ guesses }: GuessTableProps) {
   if (guesses.length === 0) return null;
 
   return (
-    <div className="flex w-full max-w-md flex-col gap-3">
+    <div className="flex w-full max-w-lg flex-col gap-3">
       {[...guesses].reverse().map((guess) => (
-        <div key={guess.character.id} className="rounded-lg bg-zinc-900 p-3">
+        <div
+          key={guess.character.id}
+          className="animate-card-reveal rounded-lg bg-zinc-900 p-3 shadow-md"
+        >
           <div className="mb-2 flex items-center gap-2">
             <Image
               src={guess.character.image}
@@ -36,14 +39,14 @@ export default function GuessTable({ guesses }: GuessTableProps) {
             />
             <span className="font-semibold text-zinc-50">{guess.character.name}</span>
           </div>
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
             {ATTRIBUTE_KEYS.map((key, i) => {
               const attr = guess.attributes[key];
               return (
                 <div
                   key={key}
                   style={{ animationDelay: `${i * 60}ms` }}
-                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium ${CELL_STYLES[attr.status]}`}
+                  className={`animate-attribute-reveal rounded-md px-2 py-1.5 text-center text-xs font-medium transition-transform duration-150 hover:scale-105 ${CELL_STYLES[attr.status]}`}
                 >
                   <div className="text-[10px] uppercase opacity-80">{ATTRIBUTE_LABELS[key]}</div>
                   <div>

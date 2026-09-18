@@ -9,6 +9,7 @@ import { ATTRIBUTE_KEYS, Character, GuessResult } from "@/lib/types";
 import CharacterSearch from "@/components/CharacterSearch";
 import GuessTable from "@/components/GuessTable";
 import HintPanel from "@/components/HintPanel";
+import Button from "@/components/Button";
 
 const EMOJI: Record<string, string> = {
   correct: "🟩",
@@ -153,7 +154,7 @@ export default function Home() {
       {!session.finished && <HintPanel answer={answer} guessCount={session.guesses.length} />}
 
       {session.finished && (
-        <div className="flex w-full max-w-md flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">
+        <div className="animate-card-reveal flex w-full max-w-lg flex-col items-center gap-3 rounded-lg border border-zinc-800 bg-zinc-900 p-5 text-center">
           <Image
             src={answer.image}
             alt={answer.name}
@@ -167,18 +168,12 @@ export default function Home() {
             <span className="text-pink-400">{answer.name}</span>
           </p>
           <div className="flex gap-3">
-            <button
-              onClick={handleShare}
-              className="rounded-full bg-pink-600 px-5 py-2 font-semibold text-white transition-colors hover:bg-pink-500"
-            >
+            <Button variant="primary" onClick={handleShare}>
               {copied ? "Copié !" : "Partager mon résultat"}
-            </button>
-            <button
-              onClick={handleReplay}
-              className="rounded-full border border-zinc-700 px-5 py-2 font-semibold text-zinc-200 transition-colors hover:bg-zinc-800"
-            >
+            </Button>
+            <Button variant="secondary" onClick={handleReplay}>
               Rejouer
-            </button>
+            </Button>
           </div>
         </div>
       )}
