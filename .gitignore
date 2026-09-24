@@ -42,3 +42,5 @@ next-env.d.ts
 
 # outils locaux
 .claude/
+CLAUDE.md
+AGENTS.md
